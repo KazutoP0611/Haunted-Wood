@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Arrow
+  - Enemy
+  - Heal
+  - Key
+  - Box
+  - Door
+  - Interactable
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Arrow
+  - Enemy
+  - Area
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Map
+    uniqueID: 2061756291
+    locked: 0
+  - name: Box
+    uniqueID: 2929544787
+    locked: 0
+  - name: Player
+    uniqueID: 412059221
+    locked: 0
+  - name: Enemy
+    uniqueID: 1613956173
+    locked: 0
+  - name: Item
+    uniqueID: 104501529
+    locked: 0
+  - name: Arrow
+    uniqueID: 1622230181
+    locked: 0
+  m_RenderingLayers:
+  - Default
