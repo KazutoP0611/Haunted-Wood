@@ -15,11 +15,6 @@ public class AreaBoss : Area
         this.onEnterBossRoomCallback = onEnterBossRoomCallback;
     }
 
-    public override void EnterArea()
-    {
-        base.EnterArea();
-    }
-
     public override void Update()
     {
         base.Update();
@@ -41,11 +36,5 @@ public class AreaBoss : Area
     public override void ExitArea()
     {
         base.ExitArea();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            player = collision.GetComponent<Player>();
     }
 }

@@ -3,14 +3,14 @@ using UnityEngine;
 public class BossEnemy : Enemy
 {
     [Header("Item Settings")]
-    [Tooltip("Set this value in percentage (%).")][SerializeField] private float dropHealChance = 30;
+    [Tooltip("Set this value between 0 to 1")][SerializeField] private float dropHealChance = 0.3f;
     [SerializeField] private GameObject healItem; 
 
-    public override void TakeDamage(int damage)
+    public override void OnTakeDamage(int damage)
     {
-        base.TakeDamage(damage);
+        base.OnTakeDamage(damage);
 
-        if (Random.value <= dropHealChance / 100.0f)
+        if (Random.value <= dropHealChance)
             Instantiate(healItem, transform.position, Quaternion.identity);
     }
 }

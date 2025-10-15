@@ -38,4 +38,10 @@ public class Area : MonoBehaviour
         foreach (Transform enemyTransform in enemyParent)
             Destroy(enemyTransform.gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            player = collision.GetComponent<Player>();
+    }
 }

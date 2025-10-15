@@ -22,19 +22,8 @@ public class ArrowController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (collision.gameObject.tag)
-        {
-            case "Enemy":
-                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                enemy.TakeDamage(arrowDMG);
-                Destroy(gameObject);
-                break;
-            case "Box":
-                Box box = collision.gameObject.GetComponent<Box>();
-                box.TakeDamage(arrowDMG);
-                Destroy(gameObject);
-                break;
-        }
+        IDamagable hitObject = collision.gameObject.GetComponent<IDamagable>();
+        hitObject?.OnTakeDamage(arrowDMG);
 
         Destroy(gameObject);
     }

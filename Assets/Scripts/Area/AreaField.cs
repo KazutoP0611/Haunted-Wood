@@ -51,9 +51,9 @@ public class AreaField : Area
             for (int i = 0; i < enemySpawnPoints.Length; i++)
                 tempList.Add(i);
 
-            //Random numbers of created list into new list and return them;
             for (int i = 0; i < enemySpawnPoints.Length; i++)
             {
+                //Random numbers of created list for spawn enemy;
                 int numberIndex = UnityEngine.Random.Range(0, tempList.Count);
 
                 if (i == enemySpawnPoints.Length - 1)
@@ -83,10 +83,4 @@ public class AreaField : Area
     //    foreach (Enemy enemy in listOfEnemy)
     //        enemy.SetActionActiveEnemy(activate);
     //}
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            player = collision.GetComponent<Player>();
-    }
 }

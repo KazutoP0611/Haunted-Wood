@@ -2,7 +2,7 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamagable
 {
     public delegate void OnEnemyDestroy();
     private OnEnemyDestroy onEnemyDestroyCallback;
@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float targetCheckRadius;
     [SerializeField] private LayerMask targetLayer;
 
+    [Header("On Hit Details")]
+    [SerializeField] private float hitEffectDuration;
+    [SerializeField] private Material hitMaterial;
+
     public Enemy_IdleState enemyIdleState { get; private set; }
     public Enemy_WalkState enemyWalkState { get; private set; }
     public Enemy_AttackState enemyAttackState { get; private set; }
@@ -46,7 +50,10 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D col;
     private float waitForAfterEnemyDied = 0;
+    private Renderer rend;
+    private Material originalMaterial;
     private Coroutine waitForAfterEnemyDiedCoroutine;
+    private Coroutine hitEffectCoroutine;
 
     public void InitEnemy(OnEnemyDestroy onEnemyDestroyCallback, float waitForAfterEnemyDied)
     {
@@ -60,6 +67,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        rend = GetComponentInChildren<Renderer>();
 
         f_DistanceFromPlayerToAttack = distanceFromPlayertoAttack;
         f_Speed = speed;
@@ -82,6 +90,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         stateMachine.Initialized(enemyIdleState);
+        originalMaterial = rend.material;
     }
 
     private void Update()
@@ -140,10 +149,14 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void OnTakeDamage(int damage)
     {
         if (alive)
         {
+            if (hitEffectCoroutine != null)
+                StopCoroutine(hitEffectCoroutine);
+            hitEffectCoroutine = StartCoroutine(OnHitEffect());
+
             enemyHP -= damage;
             GameController.instance.AddScore(enemyHitGetPoint);
 
@@ -156,6 +169,13 @@ public class Enemy : MonoBehaviour
                 stateMachine.ChangeState(enemyDeadState);
             }
         }
+    }
+
+    IEnumerator OnHitEffect()
+    {
+        rend.material = hitMaterial;
+        yield return new WaitForSeconds(hitEffectDuration);
+        rend.material = originalMaterial;
     }
 
     public void AfterDeathHandle()
