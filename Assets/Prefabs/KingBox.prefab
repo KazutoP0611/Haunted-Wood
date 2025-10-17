@@ -151,6 +151,9 @@ MonoBehaviour:
   boxHP: 6
   dropItem: {fileID: 0}
   dropItemOffset: {x: 0, y: 0.5, z: 0}
+  chestOpenSound: {fileID: 8300000, guid: 6ba5b591426919643872a1070ca4ba73, type: 3}
+  chestDropSound: {fileID: 8300000, guid: 1bf444b1b61358343806e9a4b40610b9, type: 3}
+  healingItemDropChance: 0.3
 --- !u!95 &4303056911837544949
 Animator:
   serializedVersion: 7

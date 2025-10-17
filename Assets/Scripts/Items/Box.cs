@@ -5,6 +5,8 @@ public class Box : MonoBehaviour, IDamagable
     [SerializeField] private int boxHP;
     [SerializeField] private GameObject dropItem;
     [SerializeField] private Vector3 dropItemOffset;
+    [SerializeField] private AudioClip chestOpenSound;
+    [SerializeField] private AudioClip chestDropSound;
 
     [Header("Random Drop Item Details")]
     [Tooltip("These values will matter if \"fixedBoxSpawnAmount\" in \"BoxRandomer\" component is false. Set this value between 0 to 1. If this is a king'room key's box, this number will have no effect.")]
@@ -47,12 +49,23 @@ public class Box : MonoBehaviour, IDamagable
             return;
 
         if (!autoRandomToDrop)
+        {
             Instantiate(dropItem, transform.position + dropItemOffset, Quaternion.identity, transform.parent);
+            AudioSource.PlayClipAtPoint(chestDropSound, transform.position);
+        }
         else
         {
             if (Random.value <= healingItemDropChance)
+            {
                 Instantiate(dropItem, transform.position + dropItemOffset, Quaternion.identity, transform.parent);
+                AudioSource.PlayClipAtPoint(chestDropSound, transform.position);
+            }
         }
+    }
+
+    private void PlayOpenChestSound()
+    {
+        AudioSource.PlayClipAtPoint(chestOpenSound, transform.position);
     }
 
     public void DestroyItem()

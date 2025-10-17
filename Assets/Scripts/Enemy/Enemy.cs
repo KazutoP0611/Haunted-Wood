@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
@@ -12,6 +13,9 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private float speed;
     [SerializeField] private int enemyHP;
     [SerializeField] private int enemyAtkPow;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip takeDamageSound;
+    [SerializeField] private AudioClip deadSound;
 
     [Header("Enemy Points")]
     [SerializeField] private int enemyHitGetPoint;
@@ -54,6 +58,7 @@ public class Enemy : MonoBehaviour, IDamagable
     private Material originalMaterial;
     private Coroutine waitForAfterEnemyDiedCoroutine;
     private Coroutine hitEffectCoroutine;
+    private AudioSource audioSource;
 
     public void InitEnemy(OnEnemyDestroy onEnemyDestroyCallback, float waitForAfterEnemyDied)
     {
@@ -68,6 +73,7 @@ public class Enemy : MonoBehaviour, IDamagable
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         rend = GetComponentInChildren<Renderer>();
+        audioSource = GetComponent<AudioSource>();
 
         f_DistanceFromPlayerToAttack = distanceFromPlayertoAttack;
         f_Speed = speed;
@@ -111,24 +117,40 @@ public class Enemy : MonoBehaviour, IDamagable
         rb.velocity = new Vector2(xValue * speed, yValue * speed);
     }
 
+    private void HandleFlip()
+    {
+        Vector3 vectorToPlayer = player.transform.position - transform.position;
+
+        if (attacking)
+            return;
+
+        if (vectorToPlayer.x > 0 && !facingRight)
+            Flip();
+        else if (vectorToPlayer.x < 0 && facingRight)
+            Flip();
+    }
+
     public void Flip()
     {
         facingRight = !facingRight;
         spriteRenTransform.Rotate(new Vector3(0, 180, 0));
     }
 
-    private void HandleFlip()
-    {
-        Vector3 vectorToPlayer = player.transform.position - transform.position;
-        if (vectorToPlayer.x > 0 && !facingRight && !attacking)
-            Flip();
-        else if (vectorToPlayer.x < -0 && facingRight && !attacking)
-            Flip();
-    }
-
     public void AnimationTriggerAttack(bool attacking)
     {
         this.attacking = attacking;
+    }
+
+    public void PlayAttackSound()
+    {
+        if (audioSource.clip != attackSound)
+            audioSource.clip = attackSound;
+        audioSource.Play(0);
+    }
+
+    public void PlayDeadSound()
+    {
+        AudioSource.PlayClipAtPoint(deadSound, transform.position);
     }
 
     public void GetDetectedColliders()
@@ -153,8 +175,11 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         if (alive)
         {
+            AudioSource.PlayClipAtPoint(takeDamageSound, transform.position);
+
             if (hitEffectCoroutine != null)
                 StopCoroutine(hitEffectCoroutine);
+
             hitEffectCoroutine = StartCoroutine(OnHitEffect());
 
             enemyHP -= damage;
@@ -162,6 +187,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
             if (enemyHP <= 0)
             {
+                audioSource.Stop();
+
                 col.enabled = false;
                 alive = false;
                 //isActivating = false;

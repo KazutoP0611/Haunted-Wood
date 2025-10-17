@@ -19,6 +19,16 @@ public class EnemyAnimationTrigger : MonoBehaviour
         enemy.AnimationTriggerAttack(false);
     }
 
+    private void PlayAttackSound()
+    {
+        enemy.PlayAttackSound();
+    }
+
+    private void PlayDeadSound()
+    {
+        enemy.PlayDeadSound();
+    }
+
     private void TriggerAttack()
     {
         enemy.GetDetectedColliders();

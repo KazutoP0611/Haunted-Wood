@@ -6,6 +6,12 @@ public class ArrowController : MonoBehaviour
     [SerializeField] private bool reverse;
     [SerializeField] private Vector2 limitX, limitY;
     [SerializeField] private int arrowDMG;
+    [SerializeField] private AudioClip arrowShotSound;
+
+    private void Start()
+    {
+        AudioSource.PlayClipAtPoint(arrowShotSound, transform.position);
+    }
 
     private void Update()
     {

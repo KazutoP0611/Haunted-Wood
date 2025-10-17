@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private GameObject bowParent;
     [SerializeField] private int playerMaxHP;
+    [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private AudioClip keyPickupSound;
 
     [Header("Weapon Settings")]
     [SerializeField] GameObject arrowPrefab;
@@ -102,7 +104,6 @@ public class Player : MonoBehaviour
             if (input.PlayerControl.Shoot.WasPerformedThisFrame())
                 Instantiate(arrowPrefab, bowParent.transform.position + (bowParent.transform.up * arrowSpawnOffSet), bowParent.transform.rotation);
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -110,11 +111,13 @@ public class Player : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Key":
+                AudioSource.PlayClipAtPoint(keyPickupSound, transform.position);
                 GameController.instance.SetActiveKeyIcon(true);
                 hasKingKey = true;
                 Destroy(collision.gameObject);
                 break;
             case "Heal":
+                AudioSource.PlayClipAtPoint(pickupSound, transform.position);
                 HealingBox healingBox = collision.GetComponent<HealingBox>();
                 Heal(healingBox.GetHealPoint());
                 Destroy(collision.gameObject);

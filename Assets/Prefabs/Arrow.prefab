@@ -107,6 +107,7 @@ MonoBehaviour:
   limitX: {x: -5.7, y: 5.7}
   limitY: {x: -5.2, y: 5.2}
   arrowDMG: 1
+  arrowShotSound: {fileID: 8300000, guid: e873cb67a01872b4387efbb635fae60b, type: 3}
 --- !u!61 &9022774386345748675
 BoxCollider2D:
   m_ObjectHideFlags: 0

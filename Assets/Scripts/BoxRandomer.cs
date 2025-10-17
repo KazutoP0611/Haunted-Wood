@@ -11,12 +11,13 @@ public class BoxRandomer : MonoBehaviour
     [Header("Box Spawner Mode")]
     [Tooltip("If true, this scipt will randomly place healing item, so some boxes may empty. Uncheck it, and the box script will be the one take care of random chance if healing item will be spawn or not.")]
     [SerializeField] private bool fixedBoxSpawnAmount;
-    [SerializeField] private GameObject boxPrefab;
     [SerializeField] private Vector2 healItemAmount;
+    [SerializeField] private GameObject boxPrefab;
     [SerializeField] private GameObject healItem;
     [Space]
     [SerializeField] private GameObject kingBoxPrefab;
     [SerializeField] private GameObject keyPrefab;
+    [SerializeField] private float kingboxSpawnChance = 0.06f;
 
     [Header("For Debug Only")]
     [SerializeField] private bool testBoss;
@@ -59,7 +60,7 @@ public class BoxRandomer : MonoBehaviour
                 }
 
                 //Random 10% chance for spawning king's room's key. so the key will not be easily spawned at the first half loop.
-                if (UnityEngine.Random.value < 0.1f && !keyIsSpawned)
+                if (UnityEngine.Random.value < kingboxSpawnChance && !keyIsSpawned)
                 {
                     Box box = Instantiate(kingBoxPrefab, boxSpawnerPoint[tempList[numberIndex]].position, Quaternion.identity, spawnParent).GetComponent<Box>();
                     box.SetItemToDrop(keyPrefab);
@@ -72,7 +73,6 @@ public class BoxRandomer : MonoBehaviour
 
                     if (fixedBoxSpawnAmount)
                     {
-
                         #region First method for setting item, random if this box will have item in it or not. But this have flaw that it may not set key as the same amount as it should be
                         ////Random 50% chance if this box should have healing item in it.
                         //bool shouldSpawnHealItem = false;
@@ -95,7 +95,6 @@ public class BoxRandomer : MonoBehaviour
                         if (spawnHealItemAmount > 0)
                         {
                             box.SetItemToDrop(healItem);
-
                             spawnHealItemAmount--;
                         }
                         #endregion
