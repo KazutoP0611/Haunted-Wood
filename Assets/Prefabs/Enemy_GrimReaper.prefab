@@ -144,10 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenTransform: {fileID: 6048398260272471440}
-  distanceFromPlayertoAttack: 1.3
   speed: 1.8
-  enemyHP: 6
+  enemyHP: 15
   enemyAtkPow: 4
+  distanceFromPlayertoAttack: 1.8
+  minRangeToPlayertoAttack: 1.2
+  backOffVelocity: {x: 1, y: 0}
+  attackOffset: {x: 1, y: 0.2}
   attackSound: {fileID: 8300000, guid: 952e27a49858a2949be300526cf18b94, type: 3}
   takeDamageSound: {fileID: 8300000, guid: 20493a59648d6fc4d93ff0f247678d5e, type: 3}
   deadSound: {fileID: 8300000, guid: 508e5cc7e231694419bc6c5c53193901, type: 3}

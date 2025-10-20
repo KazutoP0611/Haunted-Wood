@@ -1,7 +1,8 @@
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Enemy_WalkState : EnemyEntityState
+public class Enemy_WalkState : Enemy_GroundState
 {
     public Enemy_WalkState(StateMachine stateMachine, Enemy enemy, string stateName) : base(stateMachine, enemy, stateName)
     {
@@ -13,18 +14,13 @@ public class Enemy_WalkState : EnemyEntityState
 
         if (enemy.alive)
         {
-            if (player.alive/* && enemy.isActivating*/)
+            if (player.alive)
             {
-                Vector3 normalizedVector = vectorToPlayer.normalized;
+                Vector3 normalizedVector = (targetPosition - enemy.transform.position).normalized;
                 enemy.SetVelocity(normalizedVector.x, normalizedVector.y);
-                //enemy.transform.position += vectorToPlayer * Time.deltaTime * enemy.f_Speed;
-
-                if (vectorToPlayer.magnitude <= distanceFromPlayertoAttack)
-                    stateMachine.ChangeState(enemy.enemyAttackState);
             }
-            else/* if (!enemy.isActivating)*/
+            else
                 stateMachine.ChangeState(enemy.enemyIdleState);
-
         }
     }
 }

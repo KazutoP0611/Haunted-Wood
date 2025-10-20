@@ -7,6 +7,7 @@ public abstract class EntityState
 
     protected string stateName;
     protected Animator anim;
+    protected Rigidbody2D rb;
 
     public EntityState(StateMachine stateMachine, string stateName)
     {

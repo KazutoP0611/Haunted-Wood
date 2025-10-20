@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using static UnityEngine.UI.Image;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
@@ -9,10 +11,17 @@ public class Enemy : MonoBehaviour, IDamagable
     private OnEnemyDestroy onEnemyDestroyCallback;
 
     [SerializeField] private Transform spriteRenTransform;
-    [SerializeField] private float distanceFromPlayertoAttack;
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private int enemyHP;
     [SerializeField] private int enemyAtkPow;
+
+    [Header("Attack Details")]
+    public float distanceFromPlayertoAttack;
+    public float minRangeToPlayertoAttack;
+    public Vector2 backOffVelocity;
+    public Vector2 attackOffset;
+
+    [Header("VFX Details")]
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private AudioClip takeDamageSound;
     [SerializeField] private AudioClip deadSound;
@@ -35,23 +44,20 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public Enemy_IdleState enemyIdleState { get; private set; }
     public Enemy_WalkState enemyWalkState { get; private set; }
+    public Enemy_BattleState enemyBattleState { get; private set; }
     public Enemy_AttackState enemyAttackState { get; private set; }
     public Enemy_DeadState enemyDeadState { get; private set; }
 
 
-    public Animator anim { get; private set; }
     private StateMachine stateMachine;
+    public Animator anim { get; private set; }
     public bool alive { get; private set; }
     public Player player { get; private set; }
-
-
-    public float f_DistanceFromPlayerToAttack { get; private set; }
-    public float f_Speed { get; private set; }
     public bool attacking { get; private set; }
-    //public bool isActivating { get; private set; }
+    public bool b_facingRight { get => facingRight; }
+    public Rigidbody2D rb { get; private set; }
 
     private bool facingRight = true;
-    private Rigidbody2D rb;
     private Collider2D col;
     private float waitForAfterEnemyDied = 0;
     private Renderer rend;
@@ -75,13 +81,11 @@ public class Enemy : MonoBehaviour, IDamagable
         rend = GetComponentInChildren<Renderer>();
         audioSource = GetComponent<AudioSource>();
 
-        f_DistanceFromPlayerToAttack = distanceFromPlayertoAttack;
-        f_Speed = speed;
-
         stateMachine = new StateMachine();
 
         enemyIdleState = new Enemy_IdleState(stateMachine, this, "Idle");
         enemyWalkState = new Enemy_WalkState(stateMachine, this, "Walk");
+        enemyBattleState = new Enemy_BattleState(stateMachine, this, "Walk");
         enemyAttackState = new Enemy_AttackState(stateMachine, this, "Attack");
         enemyDeadState = new Enemy_DeadState(stateMachine, this, "Dead");
     }
@@ -90,7 +94,6 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         alive = true;
         attacking = false;
-        //isActivating = false;
     }
 
     private void Start()
@@ -105,9 +108,7 @@ public class Enemy : MonoBehaviour, IDamagable
         {
             stateMachine.currentState.Update();
 
-            if (player.alive)
-                HandleFlip();
-            else
+            if (!player.alive)
                 stateMachine.ChangeState(enemyIdleState);
         }
     }
@@ -115,18 +116,22 @@ public class Enemy : MonoBehaviour, IDamagable
     public void SetVelocity(float xValue, float yValue)
     {
         rb.velocity = new Vector2(xValue * speed, yValue * speed);
+        HandleFlip();
+    }
+
+    public void BackOff()
+    {
+        rb.velocity = new Vector2(backOffVelocity.x * -DirectionToPlayer(), backOffVelocity.y);
     }
 
     private void HandleFlip()
     {
-        Vector3 vectorToPlayer = player.transform.position - transform.position;
-
         if (attacking)
             return;
 
-        if (vectorToPlayer.x > 0 && !facingRight)
+        if (DirectionToPlayer() > 0 && !facingRight)
             Flip();
-        else if (vectorToPlayer.x < 0 && facingRight)
+        else if (DirectionToPlayer() < 0 && facingRight)
             Flip();
     }
 
@@ -134,6 +139,32 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         facingRight = !facingRight;
         spriteRenTransform.Rotate(new Vector3(0, 180, 0));
+    }
+
+    public float DistanceToPlayer()
+    {
+        if (player == null)
+            return float.MaxValue;
+
+        return (player.transform.position - transform.position).magnitude;
+    }
+
+    public int DirectionToPlayer()
+    {
+        if (player == null)
+            return 0;
+
+        return player.transform.position.x > transform.position.x ? 1 : -1;
+    }
+
+    public RaycastHit2D PlayerDetected()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(targetCheck.position, targetCheckRadius, Vector2.right, 0, targetLayer);
+
+        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+            return default;
+
+        return hit;
     }
 
     public void AnimationTriggerAttack(bool attacking)
@@ -169,6 +200,10 @@ public class Enemy : MonoBehaviour, IDamagable
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
+        Gizmos.DrawLine(targetCheck.position, targetCheck.position + Vector3.right * 2.0f);
     }
 
     public virtual void OnTakeDamage(int damage)
@@ -177,10 +212,7 @@ public class Enemy : MonoBehaviour, IDamagable
         {
             AudioSource.PlayClipAtPoint(takeDamageSound, transform.position);
 
-            if (hitEffectCoroutine != null)
-                StopCoroutine(hitEffectCoroutine);
-
-            hitEffectCoroutine = StartCoroutine(OnHitEffect());
+            HitEffect();
 
             enemyHP -= damage;
             GameController.instance.AddScore(enemyHitGetPoint);
@@ -196,6 +228,14 @@ public class Enemy : MonoBehaviour, IDamagable
                 stateMachine.ChangeState(enemyDeadState);
             }
         }
+    }
+
+    private void HitEffect()
+    {
+        if (hitEffectCoroutine != null)
+            StopCoroutine(hitEffectCoroutine);
+
+        hitEffectCoroutine = StartCoroutine(OnHitEffect());
     }
 
     IEnumerator OnHitEffect()

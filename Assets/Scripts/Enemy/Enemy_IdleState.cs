@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Enemy_IdleState : EnemyEntityState
+public class Enemy_IdleState : Enemy_GroundState
 {
     public Enemy_IdleState(StateMachine stateMachine, Enemy enemy, string stateName) : base(stateMachine, enemy, stateName)
     {
@@ -19,10 +19,9 @@ public class Enemy_IdleState : EnemyEntityState
     {
         base.Update();
 
-        if (player.alive/* && enemy.isActivating*/)
+        if (player.alive)
         {
-            //Debug.Log("Idle");
-            if (vectorToPlayer.magnitude > distanceFromPlayertoAttack)
+            if (vectorToPlayer.magnitude > enemy.distanceFromPlayertoAttack)
                 stateMachine.ChangeState(enemy.enemyWalkState);
             else
                 stateMachine.ChangeState(enemy.enemyAttackState);

@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private bool canBeInteracted = false;
     [SerializeField] private Collider2D interactableTriggerCollider;
+    [SerializeField] private AudioSource audioSource;
 
     private Animator anim;
 
@@ -38,5 +39,10 @@ public class Interactable : MonoBehaviour
     {
         Debug.LogWarning("door is opened!!");
         afterFinishedEventCallback?.Invoke();
+    }
+
+    private void PlaySound()
+    {
+        audioSource.Play(0);
     }
 }

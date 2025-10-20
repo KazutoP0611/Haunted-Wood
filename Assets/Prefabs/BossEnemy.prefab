@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 404871948173753601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.187, y: -0.104, z: 0}
+  m_LocalPosition: {x: 0.119, y: -0.136, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -144,10 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenTransform: {fileID: 3646175865593201185}
-  distanceFromPlayertoAttack: 1.83
   speed: 3.4
-  enemyHP: 120
+  enemyHP: 130
   enemyAtkPow: 5
+  distanceFromPlayertoAttack: 2.3
+  minRangeToPlayertoAttack: 1.5
+  backOffVelocity: {x: 1, y: 0}
+  attackOffset: {x: 1, y: 0.2}
   attackSound: {fileID: 8300000, guid: 60c587644f1d5794e885be2602e8e892, type: 3}
   takeDamageSound: {fileID: 8300000, guid: 20493a59648d6fc4d93ff0f247678d5e, type: 3}
   deadSound: {fileID: 8300000, guid: ed4d094e3c5bfe043bf64f7beb2942b2, type: 3}
@@ -155,13 +158,13 @@ MonoBehaviour:
   enemyDeadGetPoint: 1200
   targetColliders: []
   targetCheck: {fileID: 2456270681674900474}
-  targetCheckRadius: 1.34
+  targetCheckRadius: 1.61
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
   hitEffectDuration: 0.1
   hitMaterial: {fileID: 2100000, guid: 06506376801dbcc42a2ac4faac6dee92, type: 2}
-  dropHealChance: 0.08
+  dropHealChance: 0.09
   healItem: {fileID: 615154327778525336, guid: 7b7ad6afd2ad52c4f9a0bf02ac73f351, type: 3}
 --- !u!82 &8044022835868194603
 AudioSource:

@@ -17,7 +17,7 @@ public class Enemy_AttackState : EnemyEntityState
     {
         base.Update();
 
-        if (/*!enemy.isActivating && */!enemy.attacking)
-            stateMachine.ChangeState(enemy.enemyIdleState);
+        if (!enemy.attacking)
+            stateMachine.ChangeState(enemy.enemyBattleState);
     }
 }
