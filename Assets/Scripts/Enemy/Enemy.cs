@@ -201,9 +201,9 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
-        Gizmos.DrawLine(targetCheck.position, targetCheck.position + Vector3.right * 2.0f);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
+        //Gizmos.DrawLine(targetCheck.position, targetCheck.position + Vector3.right * 2.0f);
     }
 
     public virtual void OnTakeDamage(int damage)

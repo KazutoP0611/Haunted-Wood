@@ -49,18 +49,18 @@ public class Box : MonoBehaviour, IDamagable
             return;
 
         if (!autoRandomToDrop)
-        {
-            Instantiate(dropItem, transform.position + dropItemOffset, Quaternion.identity, transform.parent);
-            AudioSource.PlayClipAtPoint(chestDropSound, transform.position);
-        }
+            SpawnDropObject();
         else
         {
             if (Random.value <= healingItemDropChance)
-            {
-                Instantiate(dropItem, transform.position + dropItemOffset, Quaternion.identity, transform.parent);
-                AudioSource.PlayClipAtPoint(chestDropSound, transform.position);
-            }
+                SpawnDropObject();
         }
+    }
+
+    private void SpawnDropObject()
+    {
+        Instantiate(dropItem, transform.position + dropItemOffset, Quaternion.identity, transform.parent);
+        AudioSource.PlayClipAtPoint(chestDropSound, transform.position);
     }
 
     private void PlayOpenChestSound()

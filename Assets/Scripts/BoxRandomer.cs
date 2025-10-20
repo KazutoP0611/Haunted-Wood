@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -49,24 +50,24 @@ public class BoxRandomer : MonoBehaviour
                 //random the number from the amount of transform in templist, after spawned box in randomed transform, the script will remove that transform from list, so next loop will not be in the same place.
                 int numberIndex = UnityEngine.Random.Range(0, tempList.Count);
 
+                void SpawnKingBox()
+                {
+                    Box box = Instantiate(kingBoxPrefab, boxSpawnerPoint[tempList[numberIndex]].position, Quaternion.identity, spawnParent).GetComponent<Box>();
+                    box.SetItemToDrop(keyPrefab);
+                    keyIsSpawned = true;
+                    tempList.RemoveAt(numberIndex);
+                }
+
                 //If this loop is the last loop, and king's room key hasn't been spawned yet, this will force setting the last box as the king's box.
                 if (i == boxSpawnerPoint.Length - 1 && !keyIsSpawned)
                 {
-                    Box box = Instantiate(kingBoxPrefab, boxSpawnerPoint[tempList[numberIndex]].position, Quaternion.identity, spawnParent).GetComponent<Box>();
-                    box.SetItemToDrop(keyPrefab);
-                    keyIsSpawned = true;
-                    tempList.RemoveAt(numberIndex);
+                    SpawnKingBox();
                     continue;
                 }
 
-                //Random 10% chance for spawning king's room's key. so the key will not be easily spawned at the first half loop.
+                //Random chance for spawning king's room's key. so the key will not be easily spawned at the first half loop.
                 if (UnityEngine.Random.value < kingboxSpawnChance && !keyIsSpawned)
-                {
-                    Box box = Instantiate(kingBoxPrefab, boxSpawnerPoint[tempList[numberIndex]].position, Quaternion.identity, spawnParent).GetComponent<Box>();
-                    box.SetItemToDrop(keyPrefab);
-                    keyIsSpawned = true;
-                    tempList.RemoveAt(numberIndex);
-                }
+                    SpawnKingBox();
                 else
                 {
                     Box box = Instantiate(boxPrefab, boxSpawnerPoint[tempList[numberIndex]].position, Quaternion.identity, spawnParent).GetComponent<Box>();
@@ -91,7 +92,7 @@ public class BoxRandomer : MonoBehaviour
                         #endregion
 
                         #region Second methosd for setting item, set this box to have item anyway. This will make sure that there will be the same amount of healing item as it has been randomed.
-                        //This will set healing item no matter what. The position of the box is random anyway, so I don't think they will be too close to each other.
+                        //This will set to drop healing item no matter what. The position of the box is random anyway, so I don't think they will be too close to each other.
                         if (spawnHealItemAmount > 0)
                         {
                             box.SetItemToDrop(healItem);
