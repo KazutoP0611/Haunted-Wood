@@ -61,13 +61,13 @@ public class AreaField : Area
                     bool spawnSkeleton = Convert.ToBoolean(UnityEngine.Random.Range(0, 2));
                     if (spawnSkeleton)
                     {
-                        Enemy enemy = Instantiate(GameController.instance.EnemyGrimreaper, enemySpawnPoints[tempList[numberIndex]].position, Quaternion.identity, enemyParent).GetComponent<Enemy>();
+                        Enemy enemy = Instantiate(GameplaySceneController.instance.EnemyGrimreaper, enemySpawnPoints[tempList[numberIndex]].position, Quaternion.identity, enemyParent).GetComponent<Enemy>();
                         listOfEnemy.Add(enemy);
                     }
                 }
                 else
                 {
-                    Enemy enemy = Instantiate(GameController.instance.EnemySkeleton, enemySpawnPoints[tempList[numberIndex]].position, Quaternion.identity, enemyParent).GetComponent<Enemy>();
+                    Enemy enemy = Instantiate(GameplaySceneController.instance.EnemySkeleton, enemySpawnPoints[tempList[numberIndex]].position, Quaternion.identity, enemyParent).GetComponent<Enemy>();
                     listOfEnemy.Add(enemy);
                 }
 

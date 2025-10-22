@@ -4,11 +4,11 @@ public class BossAppearAnimTrigger : MonoBehaviour
 {
     private void SpawnBoss()
     {
-        GameController.instance.SpawnBossEnemy();
+        GameplaySceneController.instance.SpawnBossEnemy();
     }
 
     private void OnEventFinished()
     {
-        GameController.instance.BossAppearanceEventFinished();
+        GameplaySceneController.instance.BossAppearanceEventFinished();
     }
 }

@@ -215,7 +215,7 @@ public class Enemy : MonoBehaviour, IDamagable
             HitEffect();
 
             enemyHP -= damage;
-            GameController.instance.AddScore(enemyHitGetPoint);
+            GameplaySceneController.instance.AddScore(enemyHitGetPoint);
 
             if (enemyHP <= 0)
             {
@@ -224,7 +224,7 @@ public class Enemy : MonoBehaviour, IDamagable
                 col.enabled = false;
                 alive = false;
                 //isActivating = false;
-                GameController.instance.AddScore(enemyDeadGetPoint);
+                GameplaySceneController.instance.AddScore(enemyDeadGetPoint);
                 stateMachine.ChangeState(enemyDeadState);
             }
         }

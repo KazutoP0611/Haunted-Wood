@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     {
         stateMachine.Initialized(playerIdleState);
         currentHP = playerMaxHP;
-        GameController.instance.UpdateHealthPoint((float)currentHP / playerMaxHP);
+        GameplaySceneController.instance.UpdateHealthPoint((float)currentHP / playerMaxHP);
         SetActiveInteractable(false);
     }
 
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
         {
             case "Key":
                 AudioSource.PlayClipAtPoint(keyPickupSound, transform.position);
-                GameController.instance.SetActiveKeyIcon(true);
+                GameplaySceneController.instance.SetActiveKeyIcon(true);
                 hasKingKey = true;
                 Destroy(collision.gameObject);
                 break;
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
                 if (hasKingKey)
                     SetActiveInteractable(true);
                 else
-                    GameController.instance.ShowKingRoomText();
+                    GameplaySceneController.instance.ShowKingRoomText();
                 break;
         }
     }
@@ -141,13 +141,13 @@ public class Player : MonoBehaviour
     private void Heal(int healPoint)
     {
         currentHP = Mathf.Clamp(currentHP + healPoint, 0, playerMaxHP);
-        GameController.instance.UpdateHealthPoint((float)currentHP / playerMaxHP);
+        GameplaySceneController.instance.UpdateHealthPoint((float)currentHP / playerMaxHP);
     }
 
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
-        GameController.instance.UpdateHealthPoint((float)currentHP / playerMaxHP);
+        GameplaySceneController.instance.UpdateHealthPoint((float)currentHP / playerMaxHP);
 
         if (currentHP <= 0)
         {
@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         if (!active)
             currentInteractable = null;
         ableToInteract = active;
-        GameController.instance.SetActiveInteractText(active);
+        GameplaySceneController.instance.SetActiveInteractText(active);
     }
 
     private void OnInteract()
@@ -181,6 +181,6 @@ public class Player : MonoBehaviour
 
     private void OnDead()
     {
-        GameController.instance.OnGameOver();
+        GameplaySceneController.instance.OnGameOver();
     }
 }

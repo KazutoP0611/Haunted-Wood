@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+public class GameplaySceneController : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private Camera[] cameras;
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
     public GameObject EnemySkeleton { get { return EnemySkeletonPrefab; } }
     public GameObject EnemyGrimreaper { get { return EnemyGrimreaperPrefab; } }
 
-    public static GameController instance;
+    public static GameplaySceneController instance;
 
     public Player player { get; private set; }
 

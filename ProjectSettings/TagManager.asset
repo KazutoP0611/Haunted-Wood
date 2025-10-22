@@ -66,5 +66,8 @@ TagManager:
   - name: Arrow
     uniqueID: 1622230181
     locked: 0
+  - name: Transition
+    uniqueID: 1117995301
+    locked: 0
   m_RenderingLayers:
   - Default
