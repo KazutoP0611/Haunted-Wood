@@ -34428,10 +34428,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGMManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5459606011999057510, guid: 01baa0a102de0784f9bcba5a228eb694, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7117470233961096749, guid: 01baa0a102de0784f9bcba5a228eb694, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

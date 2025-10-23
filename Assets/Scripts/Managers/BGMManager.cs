@@ -24,7 +24,7 @@ public class BGMManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ChangeSongTo(BGMSong song)
+    public void ChangeSongTo(BGMSong song, bool loop = true)
     {
         audioSource.Stop();
         switch(song)
@@ -45,6 +45,7 @@ public class BGMManager : MonoBehaviour
                 audioSource.clip = gameClearSong;
                 break;
         }
+        audioSource.loop = loop;
         audioSource.Play(0);
     }
 }

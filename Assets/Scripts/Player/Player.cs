@@ -184,5 +184,5 @@ public class Player : MonoBehaviour
         GameplaySceneController.instance.OnGameOver();
     }
 
-    private void PlayOnDeadSound() => BGMManager.instance.ChangeSongTo(BGMSong.gameOverSong);
+    private void PlayOnDeadSound() => BGMManager.instance.ChangeSongTo(BGMSong.gameOverSong, false);
 }
