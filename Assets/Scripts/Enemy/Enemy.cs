@@ -260,4 +260,9 @@ public class Enemy : MonoBehaviour, IDamagable
         onEnemyDestroyCallback?.Invoke();
         Destroy(gameObject);
     }
+
+    public void PlayBossDeadSong()
+    {
+        BGMManager.instance.ChangeSongTo(BGMSong.gameClearSong);
+    }
 }

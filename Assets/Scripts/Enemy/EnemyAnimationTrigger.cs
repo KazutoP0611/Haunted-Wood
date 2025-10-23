@@ -38,4 +38,9 @@ public class EnemyAnimationTrigger : MonoBehaviour
     {
         enemy.AfterDeathHandle();
     }
+
+    private void PlayBossDeadSong()
+    {
+        enemy.PlayBossDeadSong();
+    }
 }

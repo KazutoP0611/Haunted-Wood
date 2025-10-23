@@ -19,21 +19,21 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ChangeLevelTo(string levelName)
+    public void ChangeLevelTo(int levelBuildIndex)
     {
         if (changeLevelCoroutine != null)
             StopCoroutine(changeLevelCoroutine);
 
-        StartCoroutine(ChangeLevelCoroutine(levelName));
+        StartCoroutine(ChangeLevelCoroutine(levelBuildIndex));
     }
 
-    private IEnumerator ChangeLevelCoroutine(string levelName)
+    private IEnumerator ChangeLevelCoroutine(int levelBuildIndex)
     {
         GetFadeUI().FadeOut();
 
         yield return GetFadeUI().fadeCoroutine;
 
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(levelBuildIndex);
     }
 
     private UI_Fade GetFadeUI()

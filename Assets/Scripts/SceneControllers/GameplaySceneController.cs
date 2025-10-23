@@ -87,6 +87,8 @@ public class GameplaySceneController : MonoBehaviour
         SetActiveKeyIcon(false);
         kingRoomText.SetActive(false);
         boxRandomer.SpawnItems();
+
+        BGMManager.instance.ChangeSongTo(BGMSong.gameSceneSong);
     }
 
     public void SetActiveKeyIcon(bool active)
@@ -163,6 +165,7 @@ public class GameplaySceneController : MonoBehaviour
 
     private void OnEnterBossRoom()
     {
+        BGMManager.instance.ChangeSongTo(BGMSong.bossSong);
         OpenCamera(2);
     }
 
@@ -210,7 +213,12 @@ public class GameplaySceneController : MonoBehaviour
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        GameManager.instance.ChangeLevelTo(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BackToMainMenu()
+    {
+        GameManager.instance.ChangeLevelTo(0);
     }
 
     public void BossDead()
