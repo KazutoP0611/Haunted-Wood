@@ -16,6 +16,7 @@ public class GameplaySceneController : MonoBehaviour
     [SerializeField] private InteractText interactText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameClearPanel;
+    [SerializeField] private TextMeshProUGUI summaryScoreText;
 
     [Header("Score Settings")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -223,6 +224,7 @@ public class GameplaySceneController : MonoBehaviour
 
     public void BossDead()
     {
+        summaryScoreText.text = "Score : " + score.ToString();
         gameClearPanel.SetActive(true);
         player.SetEnableInput(false);
     }

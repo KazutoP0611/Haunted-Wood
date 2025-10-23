@@ -15,5 +15,10 @@ public class MainMenuSceneController : MonoBehaviour
         GameManager.instance.ChangeLevelTo(1);
     }
 
+    public void QuitGame()
+    {
+        GameManager.instance.QuitApplication();
+    }
+
     public void SetActiveMenuPanel(bool active) => quitMenuPanel.SetActive(active);
 }
