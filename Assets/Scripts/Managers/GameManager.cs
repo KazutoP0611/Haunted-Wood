@@ -44,5 +44,12 @@ public class GameManager : MonoBehaviour
         return fadeUI;
     }
 
-    public void QuitApplication() => Application.Quit();
+    public void QuitApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
