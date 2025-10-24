@@ -1,6 +1,7 @@
 YouTube Video Link: https://www.youtube.com/watch?v=Fq_zkmkj1_s
 
-Platform: Windows
+Platform: Window
+
 Unity Version: 6000.0.3f1
 
 How to play:
