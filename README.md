@@ -4,7 +4,7 @@ Platform: Windows
 Unity Version: 6000.0.3f1
 
 How to play:
-1. Use WASD for movements.
+1. Use WASD or Arrow keys for movements to move the character.
 2. Use mouse cursor for aiming.
 3. Mouse left click for shooting arrows
 
