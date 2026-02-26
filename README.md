@@ -2,7 +2,7 @@
 
 #### 🌲 Haunted Wood
 A 2D pixel-style action game built in Unity using Tilemap.  
-This project was inspired by a childhood favorite, *KND Tummy Trouble*, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
+This project was inspired by a childhood favorite, **KND : Tummy Trouble**, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
 
 The game features a forest-themed world, bow-and-arrow combat, and progression built around discovering a hidden key to unlock the boss room.
 
@@ -11,11 +11,11 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 ---
 
 #### ⚙️ Technical Highlights
-- Engine: Unity 6 ver 6000.0.3f1
+- Engine: Unity 6 (6000.0.3f1)
 - Programming Language: C#
 - Unity Tilemap for level construction
-- Object-Oriented enemy architecture (shared parent class)
-- Controlled random spawn system with deterministic fallback
+- Object-Oriented enemy architecture
+- Controlled random spawn system
 - Precomputed item drop logic for debugging stability
 - Dictionary-based map block positioning system
 - Trigger-based block detection
@@ -33,23 +33,21 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 ##### 🏹 Combat & Enemy System
 - Bow-and-arrow ranged combat
 - Three enemy types:
-  - **Forest Soldier**
-  - **Skeleton Reaper**
+  - **Skeleton Soldier**
+  - **Grim Reaper**
   - **Boss Enemy**
 - All enemies inherit from a shared base class
 - Differences handled through parameters, stats, and animations
 
 This structure reduces duplication and allows scalable enemy expansion.
 
----
-
 #### 🎲 Randomized Spawn System
 
-##### Box Placement Logic
+##### 📦 Box Placement Logic
 - Multiple predefined spawn points are placed across the map using `Transform` references.
 - Each spawn point evaluates a random chance to spawn either:
   - A normal box
-  - A boss key box
+  - A boss key box 🔑
 
 To prevent progression failure:
 - The system checks whether the boss key box has been placed.
@@ -57,9 +55,7 @@ To prevent progression failure:
 
 This guarantees progression while maintaining randomness.
 
----
-
-##### Item Drop System
+##### 🎁 Item Drop System
 - When a normal box is spawned, it pre-determines at game initialization whether it will drop a healing item.
 - Drop chances are calculated once at startup rather than on impact.
 - This allows:
@@ -75,18 +71,17 @@ The boss key box always drops the key without fail.
 
 Instead of moving the camera between areas, the map itself is repositioned dynamically.
 
-##### How It Works:
-- The world is divided into logical map blocks (like 3x3 connected panels).
-- Each block has a unique ID.
-- A `Dictionary<int, Vector3>` stores block IDs and their corresponding world positions.
-- When the player enters a new block (via `OnTriggerEnter`), the block ID is sent to a manager system.
-- The manager retrieves the target position from the dictionary and repositions the map object accordingly.
+##### ⚙️ How It Works
+- The world is divided into area blocks.
+- Each area component initializes itself with a manager at game start.
+- When the player enters a new area (`OnTriggerEnter`), a distance threshold check is performed before triggering the transition callback.
+- The manager calculates the target position using the area's predefined offset.
+- The map object is then repositioned accordingly.
 
 This approach:
-- Keeps the player centered
 - Simplifies camera logic
-- Avoids multiple scene loading
-- Maintains controlled world transitions
+- Maintains controlled transitions
+- Keeps the world modular and scalable
 
 ---
 
