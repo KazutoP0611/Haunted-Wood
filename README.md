@@ -1,12 +1,108 @@
-YouTube Video Link: https://www.youtube.com/watch?v=Fq_zkmkj1_s
+# Haunted Wood (2D Pixel Action Game)
 
-Platform: Window
+#### 🌲 Haunted Wood
+A 2D pixel-style action game built in Unity using Tilemap.  
+This project was inspired by a childhood favorite, *KND Tummy Trouble*, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
 
-Unity Version: 6000.0.3f1
+The game features a forest-themed world, bow-and-arrow combat, and progression built around discovering a hidden key to unlock the boss room.
 
-How to play:
-1. Use WASD or Arrow keys for movements to move the character.
-2. Use mouse cursor for aiming.
-3. Mouse left click for shooting arrows
+<img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/3c71eaa2-7ae3-4c36-a841-1857c289f5f8" />
 
-That's it, enjoy!!
+---
+
+#### ⚙️ Technical Highlights
+- Engine: Unity 6 ver 6000.0.3f1
+- Programming Language: C#
+- Unity Tilemap for level construction
+- Object-Oriented enemy architecture (shared parent class)
+- Controlled random spawn system with deterministic fallback
+- Precomputed item drop logic for debugging stability
+- Dictionary-based map block positioning system
+- Trigger-based block detection
+- Boss cutscene implementation
+
+---
+
+#### 🎥 Gameplay Video
+[Watch Gameplay Video](https://www.youtube.com/watch?v=Fq_zkmkj1_s)
+
+---
+
+#### 🎮 Core Gameplay
+
+##### 🏹 Combat & Enemy System
+- Bow-and-arrow ranged combat
+- Three enemy types:
+  - **Forest Soldier**
+  - **Skeleton Reaper**
+  - **Boss Enemy**
+- All enemies inherit from a shared base class
+- Differences handled through parameters, stats, and animations
+
+This structure reduces duplication and allows scalable enemy expansion.
+
+---
+
+#### 🎲 Randomized Spawn System
+
+##### Box Placement Logic
+- Multiple predefined spawn points are placed across the map using `Transform` references.
+- Each spawn point evaluates a random chance to spawn either:
+  - A normal box
+  - A boss key box
+
+To prevent progression failure:
+- The system checks whether the boss key box has been placed.
+- If the final spawn point is reached and no boss key box has spawned, the system forces that location to spawn the boss key box.
+
+This guarantees progression while maintaining randomness.
+
+---
+
+##### Item Drop System
+- When a normal box is spawned, it pre-determines at game initialization whether it will drop a healing item.
+- Drop chances are calculated once at startup rather than on impact.
+- This allows:
+  - Predictable debugging
+  - Clear tracking of total healing items in a run
+  - Stable runtime behavior
+
+The boss key box always drops the key without fail.
+
+---
+
+#### 🗺 Map Block Transition System
+
+Instead of moving the camera between areas, the map itself is repositioned dynamically.
+
+##### How It Works:
+- The world is divided into logical map blocks (like 3x3 connected panels).
+- Each block has a unique ID.
+- A `Dictionary<int, Vector3>` stores block IDs and their corresponding world positions.
+- When the player enters a new block (via `OnTriggerEnter`), the block ID is sent to a manager system.
+- The manager retrieves the target position from the dictionary and repositions the map object accordingly.
+
+This approach:
+- Keeps the player centered
+- Simplifies camera logic
+- Avoids multiple scene loading
+- Maintains controlled world transitions
+
+---
+
+#### 🎬 Boss Encounter
+- Entering the boss room triggers a cutscene.
+- Boss entrance animation sequence before combat begins.
+- Transition from exploration pacing to high-intensity encounter.
+
+---
+
+#### 🧠 Gameplay Focus
+- Exploration and discovery
+- Controlled randomness with guaranteed progression
+- Reusable enemy architecture
+- Structured 2D system design using Unity Tilemap
+
+---
+
+This project emphasizes modular system design, deterministic randomization safeguards, and structured world transition logic within a pixel-style 2D action game.
