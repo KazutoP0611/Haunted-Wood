@@ -11,7 +11,7 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 
 ---
 
-#### ⚙️ Technical Highlights
+## ⚙️ Technical Highlights
 - Engine: Unity 6 (6000.0.3f1)
 - Programming Language: C#
 - Unity Tilemap for level construction
@@ -24,14 +24,14 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 
 ---
 
-#### 🎥 Gameplay Video
+## 🎥 Gameplay Video
 [Watch Gameplay Video](https://www.youtube.com/watch?v=Fq_zkmkj1_s)
 
 ---
 
-#### 🎮 Core Gameplay
+## 🎮 Core Gameplay
 
-##### 🏹 Combat & Enemy System
+### 🏹 Combat & Enemy System
 - Bow-and-arrow ranged combat
 
   <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/8e0e6ffd-52ea-4327-b87d-e6558ea68431" />
@@ -54,9 +54,9 @@ This structure reduces duplication and allows scalable enemy expansion.
 
 ---
 
-#### 🎲 Randomized Spawn System
+## 🎲 Randomized Spawn System
 
-##### 📦 Box Placement Logic
+### 📦 Box Placement Logic
 - Multiple predefined spawn points are placed across the map using `Transform` references.
 - Each spawn point evaluates a random chance to spawn either:
   - A normal box
@@ -68,7 +68,7 @@ To prevent progression failure:
 
 This guarantees progression while maintaining randomness.
 
-##### 🎁 Item Drop System
+### 🎁 Item Drop System
 - When a normal box is spawned, it pre-determines at game initialization whether it will drop a healing item.
 - Drop chances are calculated once at startup rather than on impact.
 - This allows:
@@ -80,13 +80,13 @@ The boss key box always drops the key without fail.
 
 ---
 
-#### 🗺 Map Block Transition System
+## 🗺 Map Block Transition System
 
 Instead of moving the camera between areas, the map itself is repositioned dynamically.
 
 <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/226a8b45-e5aa-4f36-aa52-cb430287e024" />
 
-##### ⚙️ How It Works
+### ⚙️ How It Works
 - The world is divided into area blocks.
 - Each area component initializes itself with a manager at game start.
 - When the player enters a new area (`OnTriggerEnter`), a distance threshold check is performed before triggering the transition callback.
@@ -100,7 +100,7 @@ This approach:
 
 ---
 
-#### 🎬 Boss Encounter
+## 🎬 Boss Encounter
 - Entering the boss room triggers a cutscene.
 - Boss entrance animation sequence before combat begins.
 - Transition from exploration pacing to high-intensity encounter.
@@ -109,7 +109,7 @@ This approach:
 
 ---
 
-#### 🧠 Gameplay Focus
+## 🧠 Gameplay Focus
 - Exploration and discovery
 - Controlled randomness with guaranteed progression
 - Reusable enemy architecture
