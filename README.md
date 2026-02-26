@@ -33,6 +33,9 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 
 ##### 🏹 Combat & Enemy System
 - Bow-and-arrow ranged combat
+
+  <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/8e0e6ffd-52ea-4327-b87d-e6558ea68431" />
+
 - Three enemy types:
   
   - **Skeleton Soldier**
