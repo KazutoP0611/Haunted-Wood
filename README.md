@@ -5,7 +5,7 @@
 
 ---
 
-#### 🌲 Haunted Wood
+## 🌲 Haunted Wood
 A 2D pixel-style action game built in Unity using Tilemap.  
 This project was inspired by a childhood favorite, **[KND : Tummy Trouble](https://www.gameszap.com/game/11008/knd-tummy-trouble.html)**, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
 
@@ -24,7 +24,7 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 - Controlled random spawn system
 - Precomputed item drop logic
 - Map block positioning system
-- Trigger-based and distnace calculoation block detection
+- Trigger-based and distance calculation block detection
 - Boss cutscene implementation
 
 ---
