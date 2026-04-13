@@ -115,13 +115,13 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void SetVelocity(float xValue, float yValue)
     {
-        rb.velocity = new Vector2(xValue * speed, yValue * speed);
+        rb.linearVelocity = new Vector2(xValue * speed, yValue * speed);
         HandleFlip();
     }
 
     public void BackOff()
     {
-        rb.velocity = new Vector2(backOffVelocity.x * -DirectionToPlayer(), backOffVelocity.y);
+        rb.linearVelocity = new Vector2(backOffVelocity.x * -DirectionToPlayer(), backOffVelocity.y);
     }
 
     private void HandleFlip()

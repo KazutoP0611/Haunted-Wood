@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
 
     public void SetVelocity(float xValue, float yValue)
     {
-        rb.velocity = new Vector2 (xValue, yValue);
+        rb.linearVelocity = new Vector2 (xValue, yValue);
     }
 
     private void HandleMouse()
