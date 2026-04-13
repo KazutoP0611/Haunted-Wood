@@ -92,7 +92,7 @@ Instead of moving the camera between areas, the map itself is repositioned dynam
 
 <img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/226a8b45-e5aa-4f36-aa52-cb430287e024" />
 <br>
-<img width="590" height="480" alt="image" src="https://github.com/user-attachments/assets/a38f4683-d20c-43b8-ad43-731459a95ddf" />
+<img width="427" height="348" alt="image" src="https://github.com/user-attachments/assets/a38f4683-d20c-43b8-ad43-731459a95ddf" />
 
 ### ⚙️ How It Works
 - The world is divided into area blocks.
