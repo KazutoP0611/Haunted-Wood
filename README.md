@@ -17,7 +17,7 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 ---
 
 ## ⚙️ Technical Highlights
-- Engine: Unity 6 (6000.0.3f1)
+- Engine: Unity 6 (6000.3.6f1)
 - Programming Language: C#
 - Unity Tilemap for level construction
 - Object-Oriented enemy architecture
