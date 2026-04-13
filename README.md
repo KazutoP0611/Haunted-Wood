@@ -9,10 +9,13 @@
 A 2D pixel-style action game built in Unity using Tilemap.  
 This project was inspired by a childhood favorite, **[KND : Tummy Trouble](https://www.gameszap.com/game/11008/knd-tummy-trouble.html)**, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
 
+<img width="434" height="262" alt="image" src="https://github.com/user-attachments/assets/fceec7f8-cc29-4288-a12a-78c519014087" />
+<br><br>
+
 The game features a forest-themed world, bow-and-arrow combat, and progression built around discovering a hidden key to unlock the boss room.
 
-<img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/3c71eaa2-7ae3-4c36-a841-1857c289f5f8" />
-<img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/138daaa9-3d2e-4687-afa1-463959c18416" />
+<img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/3c71eaa2-7ae3-4c36-a841-1857c289f5f8" />
+<img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/138daaa9-3d2e-4687-afa1-463959c18416" />
 
 ---
 
@@ -34,18 +37,19 @@ The game features a forest-themed world, bow-and-arrow combat, and progression b
 ### 🏹 Combat & Enemy System
 - Bow-and-arrow ranged combat
 
-  <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/8e0e6ffd-52ea-4327-b87d-e6558ea68431" />
-
+  <img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/5e9d91e1-6886-4059-9732-ccb605027eed" />
+  <br><br>
+  
 - Three enemy types:
   
   - **Skeleton Soldier**
-    <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/e37c29a2-4f54-4351-a7da-c38521b023ea" />
+  <br><img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/e37c29a2-4f54-4351-a7da-c38521b023ea" />
 
   - **Grim Reaper**
-    <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/36fa4dcb-98f9-4c5f-aad2-307e6b9d8da2" />
+  <br><img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/36fa4dcb-98f9-4c5f-aad2-307e6b9d8da2" />
 
   - **Boss Enemy**
-    <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/5f52e5ff-a663-4d0d-ac24-c31fe9c39d6a" />
+  <br><img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/5f52e5ff-a663-4d0d-ac24-c31fe9c39d6a" />
 
 - All enemies inherit from a shared base class
 - Differences handled through parameters, stats, and animations
@@ -78,13 +82,17 @@ This guarantees progression while maintaining randomness.
 
 The boss key box always drops the key without fail.
 
+<img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/c0915b8f-394e-45d0-ad09-b295eae1a63a" />
+
 ---
 
 ## 🗺 Map Block Transition System
 
 Instead of moving the camera between areas, the map itself is repositioned dynamically.
 
-<img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/226a8b45-e5aa-4f36-aa52-cb430287e024" />
+<img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/226a8b45-e5aa-4f36-aa52-cb430287e024" />
+<br>
+<img width="590" height="480" alt="image" src="https://github.com/user-attachments/assets/a38f4683-d20c-43b8-ad43-731459a95ddf" />
 
 ### ⚙️ How It Works
 - The world is divided into area blocks.
@@ -105,7 +113,7 @@ This approach:
 - Boss entrance animation sequence before combat begins.
 - Transition from exploration pacing to high-intensity encounter.
 
-  <img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/d8dcd48c-a8f4-44d0-95af-7a137f3fe835" />
+<img width="590" height="480" alt="image" src="https://github.com/user-attachments/assets/7db4932b-d691-421f-86c7-9816a3f5d7ae" />
 
 ---
 
