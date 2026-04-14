@@ -9,7 +9,7 @@
 A 2D pixel-style action game built in Unity using Tilemap.  
 This project was inspired by a childhood favorite, **[KND : Tummy Trouble](https://www.gameszap.com/game/11008/knd-tummy-trouble.html)**, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
 
-<img width="434" height="262" alt="image" src="https://github.com/user-attachments/assets/fceec7f8-cc29-4288-a12a-78c519014087" />
+<img width="427" height="240" alt="image" src="https://github.com/user-attachments/assets/fceec7f8-cc29-4288-a12a-78c519014087" />
 <br><br>
 
 The game features a forest-themed world, bow-and-arrow combat, and progression built around discovering a hidden key to unlock the boss room.
