@@ -5,6 +5,11 @@
 
 ---
 
+## 🎮 Play this game
+[Play on itch.io](https://panutatr.itch.io/haunted-wood)
+
+---
+
 ## 🌲 Haunted Wood
 A 2D pixel-style action game built in Unity using Tilemap.  
 This project was inspired by a childhood favorite, **[KND : Tummy Trouble](https://www.gameszap.com/game/11008/knd-tummy-trouble.html)**, and focuses on exploration, structured randomization systems, and reusable enemy architecture.
